@@ -3,6 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const morgan = require('morgan');
+const path = require('path');
 const compression = require('compression');
 const Config = require('./config');
 
@@ -19,6 +20,7 @@ app.use(morgan('dev'));
 app.use(compression());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, 'client')));
 /* Express app settings - END */
 
 /* Require server routes */

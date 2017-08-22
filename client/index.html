@@ -1,0 +1,32 @@
+<html>
+
+<head>
+    <title>Image Uploader</title>
+</head>
+
+<body>
+    <div id="app">
+        <center>
+
+            <form enctype="multipart/form-data">
+            <h1>{{message}}</h1>
+                <div>
+                    <input type="file">
+                </div>
+            </form>
+        </center>
+    </div>
+
+    <script src="https://unpkg.com/vue"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                message: 'Upload Image'
+            }
+        })
+    </script>
+
+</body>
+
+</html>
