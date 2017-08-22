@@ -1,8 +1,9 @@
-let upload = require('../api/upload');
+let upload = require('../api/uploads/upload');
+let multer = require('../api/uploads/multer');
 
 module.exports = (router) => {
 
-    router.get('/ping', upload.ping);
+    router.post('/images', multer.uploadMultipart('images', 4), upload.uploadImages);
 
     return router;
 };
