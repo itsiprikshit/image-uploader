@@ -10,15 +10,17 @@
 <body>
     <center>
         <form id="uploadimage" enctype="multipart/form-data">
-            <div id="image_preview"><img id="previewing" /></div>
+            <!-- <div id="image_preview"><img id="previewing" /></div> -->
+            <div id="image_preview"></div>
             <hr>
             <label>Select Your Image</label><br/>
-            <input type="file" name="images" id="file" accept="image/*" required>
+            <input type="file" name="images" id="file" accept="image/jpeg, image/png" required>
             <input type="submit" value="Upload">
         </form>
-        <h4 id='loading'>loading...</h4>
+        <h4 id="loading">loading...</h4>
         <br />
         <div id="message"></div>
+        <img id="uploaded" />
     </center>
 </body>
 <script src="/scripts/libs/jquery-3.2.1.min.js"></script>
