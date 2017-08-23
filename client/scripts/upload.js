@@ -62,9 +62,23 @@ $(document).ready(function (e) {
             async: true,
             processData: false,
             success: function (data) {
-                let response = JSON.parse(JSON.stringify(data));
+                let response = JSON.parse(data);
                 $('#loading').hide();
-                $("#message").html("Uploaded Successfully.");
+                $('#container').empty();
+                $("#message").html("Uploaded Successfully !!!");
+
+                console.log(response);
+                let uploadedImages = [];
+                response.data.files.forEach((imageSrc) => {
+                    let image = new Image();
+                    image.src = "/" + imageSrc;
+                    uploadedImages.push(image);
+                })
+
+                uploadedImages.forEach((image) => {
+                    console.log(image);
+                    $("#uploaded-images").append(image);
+                })
             },
             error: function () {
                 $('#loading').hide();

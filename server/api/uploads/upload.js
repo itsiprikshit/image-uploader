@@ -13,10 +13,9 @@ let uploadImages = (req, res) => {
 		let response = {};
 
 		responseWrapper.files = [];
-		console.log(req.files);
 		if (req.files) {
 			responseWrapper.files = req.files.map((file) => {
-				return file.path;
+				return file.filename;
 			})
 		}
 
