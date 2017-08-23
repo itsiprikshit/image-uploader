@@ -1,11 +1,33 @@
 $(document).ready(function (e) {
     var goodImage = false;
-    var thumbnail = null;
+
     $("#uploadimage").on('submit', (function (e) {
         e.preventDefault();
         $("#message").empty();
         $('#loading').show();
-        var formData = new FormData(this);
+
+        var inputFile = $('#file')[0].files[0];
+        var mimeType = inputFile.type;
+
+        var formData = new FormData();
+
+        var canvas = $('#canvas').get(0);
+        var dataURI = canvas.toDataURL(mimeType, 1.0);
+
+        var image_blob = (function () {
+            /* Convert base64 url to binary data */
+            var binary = atob(dataURI.split(',')[1]);
+            var array = [];
+            for (var i = 0; i < binary.length; i++) {
+                array.push(binary.charCodeAt(i));
+            }
+
+            return new Blob([new Uint8Array(array)], { name: 'priskhit', type: mimeType });
+        })();
+
+        formData.append('images', inputFile);
+        formData.append('images', image_blob);
+
         if (goodImage) {
             $.ajax({
                 url: "http://localhost:8012/upload/images",
@@ -13,6 +35,7 @@ $(document).ready(function (e) {
                 data: formData,
                 contentType: false,
                 cache: false,
+                mimeType: "multipart/form-data",
                 async: true,
                 processData: false,
                 success: function (data) {
@@ -42,7 +65,6 @@ $(document).ready(function (e) {
 
         var image = new Image();
         image.file = file;
-        image.classList.add("obj");
         image.onload = loadImage;
 
         var reader = new FileReader();
@@ -65,17 +87,10 @@ $(document).ready(function (e) {
             return;
         }
 
-        this.height = 200;
-        this.width = 200;
-        $('#image_preview').append(this);
-        thumbnail = this;
+        var canvas = $("#canvas").get(0);
+        var ctx = canvas.getContext("2d");
+        ctx.drawImage(this, 0, 0, 200, 200);
+        $('#image_preview').append(canvas);
         goodImage = true;
-    }
-
-    function createMultipleImages(image) {
-        var myImage = new Image(365, 212);
-        myImage.src = image.src;
-        thumbnail = myImage;
-        document.body.appendChild(myImage);
     }
 });
