@@ -21,6 +21,7 @@ app.use(compression());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'client')));
+app.use(express.static(path.join(__dirname, 'server/uploads')));
 /* Express app settings - END */
 
 /* Require server routes */
