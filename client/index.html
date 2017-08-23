@@ -1,32 +1,27 @@
+<!DOCTYPE html>
+
 <html>
 
 <head>
     <title>Image Uploader</title>
+    <link rel="stylesheet" href="/css/style.css" />
 </head>
 
 <body>
-    <div id="app">
-        <center>
-
-            <form enctype="multipart/form-data">
-            <h1>{{message}}</h1>
-                <div>
-                    <input type="file">
-                </div>
-            </form>
-        </center>
-    </div>
-
-    <script src="https://unpkg.com/vue"></script>
-    <script>
-        var app = new Vue({
-            el: '#app',
-            data: {
-                message: 'Upload Image'
-            }
-        })
-    </script>
-
+    <center>
+        <form id="uploadimage" enctype="multipart/form-data">
+            <div id="image_preview"><img id="previewing" /></div>
+            <hr>
+            <label>Select Your Image</label><br/>
+            <input type="file" name="images" id="file" accept="image/*" required>
+            <input type="submit" value="Upload">
+        </form>
+        <h4 id='loading'>loading...</h4>
+        <br />
+        <div id="message"></div>
+    </center>
 </body>
+<script src="/scripts/libs/jquery-3.2.1.min.js"></script>
+<script src="/scripts/upload.js"></script>
 
 </html>

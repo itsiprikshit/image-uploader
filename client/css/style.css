@@ -1,0 +1,7 @@
+#image_preview{
+    overflow: auto;
+}
+
+#loading{
+    display:none;
+}
