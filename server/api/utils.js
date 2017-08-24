@@ -46,7 +46,12 @@ let readFileAndUploadToS3 = (file) => {
             }
 
             data = data.toString();
-            return uploadToS3(constants.IMAGES_UPLOAD_BUCKET_NAME, file.filename, data);
+            uploadToS3(constants.IMAGES_UPLOAD_BUCKET_NAME, file.filename, data).then((result) => {
+                fs.unlink(file.path, ()=>{});                
+                return resolve(result);
+            }, (err) => {
+                return reject(err);
+            });
         });
     })
 }
