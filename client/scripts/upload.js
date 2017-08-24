@@ -67,8 +67,13 @@ $(document).ready(function (e) {
             success: function (data) {
                 let response = JSON.parse(data);
                 $('#loading').hide();
-                $("#uploaded-images").append("<br/>Uploaded Successfully !!! <br /><br /><h1>UPLOADED IMAGES</h1>  <h4>Scroll down</h4>");
 
+                if(response.flag == 101){
+                    $("#message").html(response.message);
+                    return;                    
+                }
+                
+                $("#uploaded-images").append("<br/>Uploaded Successfully !!! <br /><br /><h1>UPLOADED IMAGES</h1>  <h4>Scroll down</h4>");
                 let uploadedImages = [];
                 response.data.files.forEach((imageSrc) => {
                     let image = new Image();
