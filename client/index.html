@@ -3,26 +3,40 @@
 <html>
 
 <head>
-    <title>Image Uploader</title>
-    <link rel="stylesheet" href="/css/style.css" />
+  <title>Image Uploader</title>
+  <link rel="stylesheet" href="/css/style.css" />
 </head>
 
 <body>
-    <center>
-        <div id="container">
-            <form id="uploadimage">
-                <div id="image-preview"></div>
-                <hr>
-                <label>Select Your Image</label><br/>
-                <input type="file" name="images" id="file" accept="image/jpeg, image/png" required>
-                <input type="submit" value="Upload">
-            </form>
-            <h4 id="loading">loading...</h4>
-            <br />
-        </div>
-        <div id="message"></div>
-        <div id="uploaded-images"></div>
-    </center>
+  <center>
+    <div class="nav-bar">
+      <ul>
+        <li><a href="/index.html">IMAGE UPLOADER</a></li>
+        <li><a href="https://github.com/prikshittekta/image-uploader" target="blank">GITHUB</a></li>
+      </ul>
+    </div>
+
+    <div id="container">
+      <div id="upload">
+        <form id="upload-image">
+          <label>Select Your Image</label><br/><br/>
+          <input type="file" name="images" id="file" accept="image/jpeg, image/png" required>
+          <input type="submit" value="Upload">
+        </form>
+        <div id="image-preview"></div>
+        <br />
+      </div>
+
+      <br/>
+      <div id="loading">uploading...</div>      
+      <div id="message"></div>
+      <div id="uploaded-images"></div>
+    </div>
+
+    <div class="footer">
+      <p>made by prikshit</p>
+    </div>
+  </center>
 </body>
 <script src="/scripts/libs/jquery-3.2.1.min.js"></script>
 <script src="/scripts/upload.js"></script>

@@ -2,16 +2,18 @@ $(document).ready(function (e) {
 
     let IMAGE = false;
 
-    $("#uploadimage").on('submit', (function (e) {
+    $("#upload-image").on('submit', (function (e) {
         e.preventDefault();
-        $("#message").empty();
-        $('#loading').show();
-
+        
         if (!IMAGE) {
             $('#loading').hide();
             $("#message").html("Cannot upload the image. Try again.");
             return;
         }
+
+        $("#message").empty();
+        $('#upload').hide();
+        $('#loading').show();
 
         let inputFile = $('#file')[0].files[0];
         let mimeType = inputFile.type;
@@ -49,6 +51,7 @@ $(document).ready(function (e) {
 
         //formData.append('images', inputFile);  APPEND ORIGINAL FILE
         sendPostRequestToServer(formData);
+
     }));
 
     function sendPostRequestToServer(formData) {
@@ -64,10 +67,8 @@ $(document).ready(function (e) {
             success: function (data) {
                 let response = JSON.parse(data);
                 $('#loading').hide();
-                $('#container').empty();
-                $("#message").html("Uploaded Successfully !!!");
+                $("#uploaded-images").append("<br/>Uploaded Successfully !!! <br /><br /><h1>UPLOADED IMAGES</h1>  <h4>Scroll down</h4>");
 
-                console.log(response);
                 let uploadedImages = [];
                 response.data.files.forEach((imageSrc) => {
                     let image = new Image();
@@ -76,7 +77,6 @@ $(document).ready(function (e) {
                 })
 
                 uploadedImages.forEach((image) => {
-                    console.log(image);
                     $("#uploaded-images").append(image);
                 })
             },
@@ -126,6 +126,7 @@ $(document).ready(function (e) {
         let verticalCanvas = createCanvas(this, 'vertical-canvas', 365, 450);
         let horizontalSmall = createCanvas(this, 'horizontal-small-canvas', 365, 212);
         let gallery = createCanvas(this, 'gallery-canvas', 380, 380);
+        $('#image-preview').append("<br /><h1>IMAGE PREVIEW</h1> <h4>Scroll down</h4>");
         $('#image-preview').append(horizontalCanvas);
         $('#image-preview').append(verticalCanvas);
         $('#image-preview').append(horizontalSmall);
