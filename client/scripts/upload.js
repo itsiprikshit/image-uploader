@@ -139,7 +139,8 @@ $(document).ready(function (e) {
         canvas.width = width;
         canvas.id = id;
         let ctx = canvas.getContext("2d");
-        ctx.drawImage(imageRef, 0, 0, width, height);
+        // ctx.drawImage(imageRef, 0, 0, width * 1.3, height * 1.3, 0, 0, width, height);   //NOT SO STRETCHED IMAGES
+        ctx.drawImage(imageRef, 0, 0, width, height);   //STRETCHED IMAGES WITHIN THE CANVAS OF GIVEN DIMENSIONS
         return canvas;
     }
 });
