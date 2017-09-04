@@ -10,21 +10,47 @@ const utils = require('../utils');
  * @returns 
  */
 let readMultipleFilesAnduploadToS3 = (files) => {
-	return new Promise((resolve, reject) => {
-		let parallelTasks = [];
-		
+	// return new Promise((resolve, reject) => {
+
+	return Promise.coroutine(function* () {
+
+		let result = [];
 		files.forEach((file) => {
-			parallelTasks.push(utils.readFileAndUploadToS3.bind(null, file));
+			result.push(yield utils.readFileAndUploadToS3(file));
 		});
 
-		return Promise.all(parallelTasks.map((task) => { return task(); })).then((result) => {
-			return resolve(result);
-		}, (err) => {
-			return reject(err);
-		})
+		return result;
+	})().then((response) => {
+		return result;
+	}).catch((err) => {
+		throw err;
 	})
+
+
+
+	// let parallelTasks = [];
+
+	// files.forEach((file) => {
+	// 	parallelTasks.push(utils.readFileAndUploadToS3.bind(null, file));
+	// });
+
+	// return Promise.all(parallelTasks.map((task) => { return task(); })).then((result) => {
+	// 	return resolve(result);
+	// }, (err) => {
+	// 	return reject(err);
+	// })
+	// })
 }
 
+let readMultipleFilesAnduploadToS3 = function * (files) {
+	let result = [];
+	files.forEach((file) => {
+		result.push(yield utils.readFileAndUploadToS3(file));
+	});
+
+	return result;
+
+}
 /**
  * Function to handle the file uploads
  * 
